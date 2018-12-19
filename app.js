@@ -13,7 +13,6 @@ document.getElementById('loan-form').addEventListener('submit', function(e){
 
 // Calculate Results
 function calculateResults(){
-  console.log('Calculating...');
   // UI Variables
   const UI_amount = document.getElementById('amount');
   const UI_interest = document.getElementById('interest');
@@ -44,7 +43,7 @@ function calculateResults(){
     // Hide loader
     document.getElementById('loading').style.display = 'none';
   } else {
-    showError('Please check your numbers');
+    showError('Please check your inputs, one or more is invalid or blank.');
   }
 }
 
