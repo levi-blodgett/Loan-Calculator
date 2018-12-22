@@ -20,15 +20,25 @@ function calculateResults(){
   const UI_monthlyPayment = document.getElementById('monthly-payment');
   const UI_totalPayment = document.getElementById('total-payment');
   const UI_totalInterest = document.getElementById('total-interest');
+  // const UI_inflation = document.getElementById('inflation');
+  // const UI_totalInflationAdjusted = document.getElementById('total-inflation-adjusted');
 
   // parseFloat() turns them into a decimal
   const principal = parseFloat(UI_amount.value);
   const calculatedInterest = parseFloat(UI_interest.value) / 100 / 12;
   const calculatedPayments = parseFloat(UI_years.value) * 12;
+  // const inflationRate = parseFloat(UI_inflation.value);
 
   // Compute monthly payments
   const x = Math.pow(1 + calculatedInterest, calculatedPayments);
   const monthly = (principal * x * calculatedInterest) / (x - 1);
+  
+  // // Calculate the % the loan will depreciate given inflation
+  // let inflationHelper = 1;
+  // for(i=0; i < UI_years.value - 1; i++){
+  //   inflationHelper = inflationHelper * ((100 - inflationRate) / 100);
+  //   console.log(inflationHelper);
+  // }
 
   //isFinite() is a JS method that determines if the number is a finite number
   if (isFinite(monthly)) {
@@ -36,9 +46,14 @@ function calculateResults(){
     UI_monthlyPayment.value = monthly.toFixed(2);
     UI_totalPayment.value = (monthly * calculatedPayments).toFixed(2);
     UI_totalInterest.value = ((monthly * calculatedPayments) - principal).toFixed(2);
+    // UI_totalInflationAdjusted.value = (UI_totalPayment.value * inflationHelper).toFixed(2);
 
     // Show results
     document.getElementById('results').style.display = 'block';
+    // document.querySelector('.inflation-group').style.display = 'block';
+    // if (isNaN(UI_inflation.value) || UI_inflation.value === 0) {
+    //   document.querySelector('.inflation-group').style.display = 'none';
+    // }
 
     // Hide loader
     document.getElementById('loading').style.display = 'none';
