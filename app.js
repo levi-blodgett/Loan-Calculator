@@ -6,13 +6,19 @@ document.getElementById('loan-form').addEventListener('submit', function(e){
   // Show loader
   document.getElementById('loading').style.display = 'block';
 
+  // Disable submit button while loading
+  document.querySelector('#submitButton').disabled = true;
+
   setTimeout(calculateResults, 1500);
+
   
   e.preventDefault();
 });
 
 // Calculate Results
 function calculateResults(){
+  // Enable submit button after loading
+  document.querySelector('#submitButton').disabled = false;
   // UI Variables
   const UI_amount = document.getElementById('amount');
   const UI_interest = document.getElementById('interest');
