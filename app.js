@@ -10,15 +10,32 @@ document.getElementById('loan-form').addEventListener('submit', function(e){
   document.querySelector('#submitButton').disabled = true;
 
   setTimeout(calculateResults, 1500);
-
   
   e.preventDefault();
 });
 
+// Keypress checker to make sure there is only an integer of a max length of 6 in interest field
+document.getElementById('interest').addEventListener('keypress', function(e) {
+  // Get an int value from the keypress
+  const interestIntValue = parseInt(e.key);
+  
+  // Check if it is Not a Number, a '.' or includes one already, or if it is longer than 6 characters, and if it is then prevent it from being typed and throw an error
+  if ((isNaN(interestIntValue) && e.key !== '.') || this.value.includes('.') || this.value.length() >= 6) {
+
+    // Prevent from being typed
+    e.preventDefault();
+
+    // Throw an error saying it is an invalid input
+    showError('Please check your input for yearly interest, it is invalid.');
+  }
+});
+
 // Calculate Results
 function calculateResults(){
+
   // Enable submit button after loading
   document.querySelector('#submitButton').disabled = false;
+
   // UI Variables
   const UI_amount = document.getElementById('amount');
   const UI_interest = document.getElementById('interest');
