@@ -30,6 +30,20 @@ document.getElementById('interest').addEventListener('keypress', function(e) {
   }
 });
 
+let arrayOfForms = document.querySelectorAll('.no-periods');
+
+arrayOfForms.forEach(function(form) {
+  form.addEventListener('keypress', function(e) {
+    if (e.key === '.') {
+      // Prevent from being typed
+      e.preventDefault();
+  
+      // Throw an error saying it is an invalid input
+      showError('Please check your inputs, the number of years and loan amount should only be in whole numbers.');
+    }
+  });
+})
+
 // Calculate Results
 function calculateResults(){
 
